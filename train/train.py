@@ -189,5 +189,5 @@ if __name__ == "__main__":
         test_size = 0.2,
         dataset_path = 'data/breast_cancer.csv',
         metric_name = 'target',
-        classifier = 'xgb', # lightgbm -> lgb, XGBoost -> xgb, CatBoost -> cat
+        classifier = 'xgb', # LightGBM -> lgb, XGBoost -> xgb, CatBoost -> cat
         n_trials = 50 ) 
