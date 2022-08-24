@@ -127,20 +127,25 @@ def train_optuna(
 
     model = model.fit(X_train_preprocessed, y_train, verbose= False)
 
-    fig = optuna.visualization.plot_contour(study)
-    fig.show()
+    # path_img1 = f'img/plot_contour_{classifier}.png'
+    # fig1 = optuna.visualization.plot_contour(study)
+    # fig1.write_image(path_img1,  format='png', engine = 'kaleido')
 
-    fig = optuna.visualization.plot_edf(study)
-    fig.show()
+    path_img2 = f'img/plot_edf_{classifier}.png'
+    fig2 = optuna.visualization.plot_edf(study)
+    fig2.write_image(path_img2,  format='png')
 
-    fig = optuna.visualization.plot_optimization_history(study)
-    fig.show()
+    path_img3 = f'img/plot_optimization_history_{classifier}.png'
+    fig3 = optuna.visualization.plot_optimization_history(study)
+    fig3.write_image(path_img3,  format='png')
 
-    fig =optuna.visualization.plot_slice(study)
-    fig.show()
+    path_img4 = f'img/plot_slice_{classifier}.png'
+    fig4 =optuna.visualization.plot_slice(study)
+    fig4.write_image(path_img4,  format='png')
 
-    fig =optuna.visualization.plot_param_importances(study)
-    fig.show()
+    path_img5 = f'img/plot_param_importances_{classifier}.png'
+    fig5 =optuna.visualization.plot_param_importances(study)
+    fig5.write_image(path_img5,  format='png')
 
     # Printing best model results and save best model and params
     print('Best score:', model.score(X_train_preprocessed, y_train))
@@ -184,5 +189,5 @@ if __name__ == "__main__":
         test_size = 0.2,
         dataset_path = 'data/breast_cancer.csv',
         metric_name = 'target',
-        classifier = 'xgb',
-        n_trials = 5 ) 
+        classifier = 'xgb', # lightgbm -> lgb, XGBoost -> xgb, CatBoost -> cat
+        n_trials = 50 ) 
