@@ -130,7 +130,7 @@ def optuna_optimizer_lgb(trial, X, y, random_state=666, n_splits=4):
     pruning_callback = optuna.integration.LightGBMPruningCallback(trial, metric=metric, valid_name='valid')
     fit_params = {
         'eval_names': ['train', 'valid'],
-        'eval_class_weight': ['balanced'],
+        #'eval_class_weight': ['balanced'],
         'eval_metric': metric,
         'early_stopping_rounds': 100,
         'callbacks': [pruning_callback],
