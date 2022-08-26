@@ -66,6 +66,8 @@ def train_optuna(
     Columns: {X_train.shape[1]}
     ''')
 
+
+    #las primeras 30 variables son numericas + una categorica + una booleana
     datadict = dict(zip(train.columns.tolist(),30*["numeric"]+['category', 'boolean']))
 
     ignore_features = []
