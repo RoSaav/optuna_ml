@@ -184,10 +184,11 @@ def train_optuna(
 
     
 if __name__ == "__main__":
+
     train_optuna(
         random_state = 1337,
         test_size = 0.2,
         dataset_path = 'data/breast_cancer.csv',
         metric_name = 'target',
-        classifier = 'xgb', # LightGBM -> lgb, XGBoost -> xgb, CatBoost -> cat
+        classifier = 'lgb', # LightGBM -> lgb, XGBoost -> xgb, CatBoost -> cat
         n_trials = 50 ) 

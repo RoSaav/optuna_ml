@@ -20,7 +20,7 @@ import json
 ###############################################################
 
 ############################################################### XGBOOST
-def optuna_optimizer_xgb(trial, X, y, metric='auc', tol=0.1, random_state=666, n_splits=4):
+def optuna_optimizer_xgb(trial, X, y, random_state=666, n_splits=4):
 
     '''
 
@@ -29,7 +29,7 @@ def optuna_optimizer_xgb(trial, X, y, metric='auc', tol=0.1, random_state=666, n
     '''
     with open("train/param_grid.json", 'r') as file:
             param_dict = json.load(file)["xgb"]
- 
+    metric='auc'
     param_grid = {   
             "objective": param_dict["objective"],          
             'random_state': random_state,
@@ -99,13 +99,15 @@ def optuna_optimizer_xgb(trial, X, y, metric='auc', tol=0.1, random_state=666, n
     return metric_valid
 
 
-def optuna_optimizer_lgb(trial, X, y, metric='auc', tol=0.1, random_state=666, n_splits=4):
+def optuna_optimizer_lgb(trial, X, y, random_state=666, n_splits=4):
     '''
     Function to optimize hyperparameter searching with OPTUNA - LightGBM
     '''
     
     with open("train/param_grid.json", 'r') as file:
             param_dict = json.load(file)["lgb"]
+
+    metric='auc'
     param_grid = {
              'objective': param_dict["objective"],
              'boosting_type': param_dict["boosting_type"],
@@ -135,6 +137,7 @@ def optuna_optimizer_lgb(trial, X, y, metric='auc', tol=0.1, random_state=666, n
         'verbose': -1
     }
     skf = StratifiedKFold(n_splits=n_splits)
+
     cv_results = {
         f'{metric}_train': [],
         'loss_train': [],
@@ -164,14 +167,14 @@ def optuna_optimizer_lgb(trial, X, y, metric='auc', tol=0.1, random_state=666, n
 
     return metric_valid
 
-def optuna_optimizer_cat(trial, X, y, metric='AUC', tol=0.05, random_state = 666, n_splits=4):
+def optuna_optimizer_cat(trial, X, y, random_state = 666, n_splits=4):
     '''
     Function to optimize hyperparameter searching with OPTUNA - Catboost
     '''
     
     with open("train/param_grid.json", 'r') as file:
             param_dict = json.load(file)["cat"]
-    
+    metric='AUC'
     param_grid = {
         'n_estimators': trial.suggest_int('n_estimators', low=param_dict["n_estimators"]["low"], high=param_dict["n_estimators"]["high"], step=param_dict["n_estimators"]["step"], log=param_dict["n_estimators"]["log"]),
         'random_state': random_state,
